@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BanHangKhoaPham</string>
+    <string name="failed">TODO</string>
+    <string name="wearing_a_dress">Wearing a Dress</string>
+    <string name="hint_search">What do you want to buy?</string>
+    <string name="spring_collection">SPRING COLLECTION</string>
+</resources>

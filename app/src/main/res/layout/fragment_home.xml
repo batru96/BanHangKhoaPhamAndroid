@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:background="#FFF"
             android:orientation="vertical"
             android:padding="8dp">
@@ -27,8 +27,8 @@
                 android:textSize="@dimen/title_size" />
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="432dp"
+                android:layout_height="216dp"
                 android:background="@drawable/banner_button"
                 android:contentDescription="@string/failed"
                 android:scaleType="fitXY"
@@ -37,7 +37,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
             android:background="#FFF"
@@ -54,10 +54,29 @@
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/pagerCategory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="432dp"
+                android:layout_height="216dp"
                 android:scaleType="fitXY" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:padding="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="@color/title_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/top_product"
+                android:textSize="@dimen/title_size" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lvProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -7,4 +7,8 @@
     <string name="list_of_category">LIST OF CATEGORY</string>
     <string name="top_product">TOP PRODUCT</string>
     <string name="image_category">Image Category</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="order_history">Order History</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="change_info">Change Info</string>
 </resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSignInActivity"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/nameSignUpInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/enter_your_name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/emailSignUpInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/enter_your_email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/passwordSignUpInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/enter_your_password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/repasswordSignUpInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/re_enter_your_password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/signin_button"
+        android:text="@string/sign_up_now" />
+
+</LinearLayout>

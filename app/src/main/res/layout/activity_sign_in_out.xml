@@ -38,10 +38,11 @@
             android:src="@drawable/ic_logo" />
     </RelativeLayout>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frameContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></LinearLayout>
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,6 +51,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/signInButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -62,6 +64,7 @@
             tools:ignore="ButtonStyle" />
 
         <Button
+            android:id="@+id/signUpButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"

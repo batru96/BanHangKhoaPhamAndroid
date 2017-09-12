@@ -12,4 +12,9 @@
     <string name="sign_out">Sign Out</string>
     <string name="change_info">Change Info</string>
     <string name="sign_up">SIGN UP</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="sign_up_now">SIGN UP NOW</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="re_enter_your_password">Re-enter your password</string>
 </resources>

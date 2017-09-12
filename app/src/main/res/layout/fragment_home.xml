@@ -29,10 +29,10 @@
             <ImageButton
                 android:layout_width="432dp"
                 android:layout_height="216dp"
-                android:background="@drawable/banner_button"
+                android:background="@drawable/banner"
                 android:contentDescription="@string/failed"
                 android:scaleType="fitXY"
-                android:src="@drawable/banner" />
+                android:src="@drawable/custom_image_click" />
         </LinearLayout>
 
         <LinearLayout

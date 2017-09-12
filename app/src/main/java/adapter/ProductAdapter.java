@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.gietb.banhangkhoapham.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,16 +44,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Product product = ds.get(position);
-        holder.tvPrice.setText(String.valueOf(product.getPrice()));
+        holder.tvPrice.setText(String.valueOf(product.getPrice()) + "$");
         holder.tvName.setText(product.getName());
-        try {
-            URL url = new URL(product.getUrl());
-            Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            holder.btnImage.setImageBitmap(image);
-        } catch(IOException e) {
-            System.out.println(e);
-        }
-
+        Picasso.with(context).load(product.getUrl()).into(holder.btnImage);
     }
 
     @Override

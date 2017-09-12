@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    android:background="@color/title_color"
     android:orientation="vertical"
     android:paddingBottom="8dp"
     android:paddingEnd="4dp"
@@ -14,27 +14,29 @@
 
     <ImageButton
         android:id="@+id/productImage"
+        android:src="@drawable/custom_image_click"
         android:layout_width="208dp"
         android:layout_height="260dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/failed" />
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/failed"
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/nameProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="BLACK WINTER"
         android:textColor="#a4000000"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        tools:text="BLACK WINTER" />
 
     <TextView
         android:id="@+id/priceProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="124$"
         android:textColor="#e434b8"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        tools:text="124$" />
 
 </LinearLayout>

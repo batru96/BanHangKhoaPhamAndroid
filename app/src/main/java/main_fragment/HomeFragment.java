@@ -41,10 +41,10 @@ public class HomeFragment extends Fragment {
         lvProducts.setLayoutManager(layoutManager);
 
         ds = new ArrayList<>();
-        ds.add(new Product(1, "Ronaldo", 112, "http://192.168.20.114/BanHangKhoaPham/images/product/54.jpg"));
-        ds.add(new Product(1, "Messi", 112, "http://192.168.20.114/BanHangKhoaPham/images/product/55.jpg"));
-        ds.add(new Product(1, "Chicharito", 112, "http://192.168.20.114/BanHangKhoaPham/images/product/56.jpg"));
-        ds.add(new Product(1, "Falcao", 112, "http://192.168.20.114/BanHangKhoaPham/images/product/57.jpg"));
+        ds.add(new Product(1, "Ronaldo", 112, "http://192.168.20.116/BanHangKhoaPham/images/product/54.jpg"));
+        ds.add(new Product(1, "Messi", 112, "http://192.168.20.116/BanHangKhoaPham/images/product/55.jpg"));
+        ds.add(new Product(1, "Chicharito", 112, "http://192.168.20.116/BanHangKhoaPham/images/product/56.jpg"));
+        ds.add(new Product(1, "Falcao", 112, "http://192.168.20.116/BanHangKhoaPham/images/product/57.jpg"));
         ProductAdapter adapter = new ProductAdapter(ds, view.getContext());
         lvProducts.setAdapter(adapter);
 

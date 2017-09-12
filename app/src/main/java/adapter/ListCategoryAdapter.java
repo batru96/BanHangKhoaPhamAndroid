@@ -1,10 +1,6 @@
 package adapter;
 
 import android.content.Context;
-import android.media.Image;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.*;
 import android.view.LayoutInflater;
 import android.view.View;

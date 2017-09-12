@@ -5,7 +5,9 @@ import android.support.v4.view.*;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.gietb.banhangkhoapham.R;
 
@@ -30,11 +32,17 @@ public class ListCategoryAdapter extends android.support.v4.view.PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.custom_category, null);
-        ImageView imageView = view.findViewById(R.id.imageView);
+        ImageButton imageView = view.findViewById(R.id.imageView);
         imageView.setImageResource(images[position]);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), position + "", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);

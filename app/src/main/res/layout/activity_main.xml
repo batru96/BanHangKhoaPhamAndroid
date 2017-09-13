@@ -78,10 +78,8 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <fragment
-        android:id="@+id/fragment_drawer"
-        android:name="drawer.NavigationDrawerFragment"
-        class="drawer.NavigationDrawerFragment"
+    <FrameLayout
+        android:id="@+id/frameDrawer"
         android:layout_width="360dp"
         android:layout_height="match_parent"
         android:layout_gravity="start" />

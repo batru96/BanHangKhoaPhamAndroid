@@ -1,5 +1,7 @@
 package com.example.gietb.banhangkhoapham;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -12,8 +14,10 @@ import android.widget.ImageButton;
 import android.widget.TableLayout;
 
 import adapter.PagerAdapter;
+import drawer.SignInDrawerFragment;
+import drawer.SignOutDrawerFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DrawerLayout mDrawerLayout;
     private ViewPager viewPager;
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(Gravity.LEFT);
             }
         });
+        onClick(null);
     }
 
     @Override
@@ -52,5 +57,27 @@ public class MainActivity extends AppCompatActivity {
         else {
             viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        Fragment fragment = null;
+        if (view == null) {
+            fragment = new SignInDrawerFragment();
+            fragmentTransaction.replace(R.id.frameDrawer, fragment);
+            fragmentTransaction.commit();
+            return;
+        }
+        switch (view.getId()) {
+            case R.id.signInButton:
+                fragment = new SignInDrawerFragment();
+                break;
+            case R.id.buttonSignOut:
+                fragment = new SignOutDrawerFragment();
+                break;
+        }
+        fragmentTransaction.replace(R.id.frameDrawer, fragment);
+        fragmentTransaction.commit();
     }
 }

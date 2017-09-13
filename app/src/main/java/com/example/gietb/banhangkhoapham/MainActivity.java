@@ -12,12 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import adapter.PagerAdapter;
+import drawer.ISendButton;
 import drawer.SignInDrawerFragment;
 import drawer.SignOutDrawerFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements ISendButton {
 
     private DrawerLayout mDrawerLayout;
     private ViewPager viewPager;
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.openDrawer(Gravity.LEFT);
             }
         });
-        onClick(null);
+        changeDrawer(null);
     }
 
     @Override
@@ -59,25 +61,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onClick(View view) {
+    public void changeDrawer(View view) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         Fragment fragment = null;
+        String tag = null;
         if (view == null) {
             fragment = new SignInDrawerFragment();
-            fragmentTransaction.replace(R.id.frameDrawer, fragment);
+            fragmentTransaction.replace(R.id.frameDrawer, fragment, "SIGN_IN");
             fragmentTransaction.commit();
             return;
         }
         switch (view.getId()) {
-            case R.id.signInButton:
-                fragment = new SignInDrawerFragment();
-                break;
             case R.id.buttonSignOut:
+                fragment = new SignInDrawerFragment();
+                tag = "SIGN_IN";
+                break;
+            case R.id.signInButton:
                 fragment = new SignOutDrawerFragment();
+                tag = "SIGN_OUT";
                 break;
         }
-        fragmentTransaction.replace(R.id.frameDrawer, fragment);
+        fragmentTransaction.replace(R.id.frameDrawer, fragment, tag);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void sendButton(Button button) {
+        changeDrawer(button);
     }
 }

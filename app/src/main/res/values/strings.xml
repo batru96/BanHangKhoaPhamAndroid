@@ -8,7 +8,6 @@
     <string name="top_product">TOP PRODUCT</string>
     <string name="image_category">Image Category</string>
     <string name="sign_in">SIGN IN</string>
-    <string name="order_history">Order History</string>
     <string name="sign_out">Sign Out</string>
     <string name="change_info">Change Info</string>
     <string name="sign_up">SIGN UP</string>
@@ -18,4 +17,6 @@
     <string name="enter_your_password">Enter your password</string>
     <string name="re_enter_your_password">Re-enter your password</string>
     <string name="sign_in_now">SIGN IN NOW</string>
+    <string name="order_history">Order History</string>
+    <string name="order_id">Order id:</string>
 </resources>

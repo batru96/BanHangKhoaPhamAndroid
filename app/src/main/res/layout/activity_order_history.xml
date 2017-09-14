@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundMain"
+    android:orientation="vertical"
+    tools:context="com.example.gietb.banhangkhoapham.OrderHistoryActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/layout_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/order_history"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_size" />
+
+        <ImageButton
+            android:id="@+id/backToMainButton"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_width"
+            android:background="@drawable/menu_button"
+            android:contentDescription="@string/failed"
+            android:scaleType="fitXY"
+            android:src="@drawable/back_white" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lvOrderHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

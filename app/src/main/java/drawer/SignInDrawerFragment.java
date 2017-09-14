@@ -2,6 +2,7 @@ package drawer;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.example.gietb.banhangkhoapham.R;
+import com.example.gietb.banhangkhoapham.SignInOutActivity;
 
 public class SignInDrawerFragment extends Fragment {
     private ISendButton listener;
@@ -28,7 +30,8 @@ public class SignInDrawerFragment extends Fragment {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.sendButton(btnSignIn);
+                startActivity(new Intent(getActivity(), SignInOutActivity.class));
+                //listener.sendButton(btnSignIn);
             }
         });
     }

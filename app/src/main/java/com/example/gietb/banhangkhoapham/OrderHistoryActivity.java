@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -19,7 +21,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private ArrayList<OrderHistory> ds;
     private OrderHistoryAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,14 @@ public class OrderHistoryActivity extends AppCompatActivity {
     }
 
     private void initControls() {
+        ImageButton btnBackToMain = findViewById(R.id.backToMainButton);
+        btnBackToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         Log.d("AAA", "FUNCTION");
         lvOrderHistory = findViewById(R.id.lvOrderHistory);
         lvOrderHistory.setHasFixedSize(true);
@@ -42,5 +51,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
         ds.add(new OrderHistory("1", "AAA", "222", "333"));
         adapter = new OrderHistoryAdapter(this, ds);
         lvOrderHistory.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
         Fragment fragment = null;
         String tag = null;
         if (view == null) {
-            fragment = new SignInDrawerFragment();
-            fragmentTransaction.replace(R.id.frameDrawer, fragment, "SIGN_IN");
+            fragment = new SignOutDrawerFragment();
+            fragmentTransaction.replace(R.id.frameDrawer, fragment, "SIGN_OUT");
             fragmentTransaction.commit();
             return;
         }

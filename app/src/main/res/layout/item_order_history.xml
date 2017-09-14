@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/order_id"
+            android:text="@string/order_time"
             tools:ignore="RelativeOverlap" />
 
         <TextView
@@ -55,7 +55,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/order_id"
+            android:text="@string/order_status"
             tools:ignore="RelativeOverlap" />
 
         <TextView
@@ -75,7 +75,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/order_id"
+            android:text="@string/order_total"
             tools:ignore="RelativeOverlap" />
 
         <TextView

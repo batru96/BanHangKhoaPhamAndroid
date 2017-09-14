@@ -19,4 +19,8 @@
     <string name="sign_in_now">SIGN IN NOW</string>
     <string name="order_history">Order History</string>
     <string name="order_id">Order id:</string>
+    <string name="order_time">Order time:</string>
+    <string name="order_status">Status</string>
+    <string name="order_total">Total</string>
+    <string name="change_your_infomation">CHANGE YOUR INFOMATION</string>
 </resources>

@@ -62,7 +62,8 @@
         <Button
             android:id="@+id/changeInfoButton"
             android:text="@string/change_your_infomation"
-            android:background="@drawable/signin_button"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_button_checkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

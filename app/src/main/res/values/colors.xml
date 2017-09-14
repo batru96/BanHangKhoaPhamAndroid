@@ -7,7 +7,7 @@
     <color name="title_color">#cecdc8</color>
     <color name="black">#000</color>
     <color name="white">#FFF</color>
-    <color name="backgroundMain">#e9ebee</color>
+    <color name="backgroundMain">#d3d9d6</color>
     <color name="colorSignInActivity">#11d8b8</color>
     <color name="pinkColor">#d948d4</color>
 </resources>

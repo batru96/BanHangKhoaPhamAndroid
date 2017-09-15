@@ -8,11 +8,18 @@
     android:paddingRight="16dp">
 
     <Button
+        android:id="@+id/buttonCheckOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/custom_button_checkout"
         android:text="TOTAL 350% CHECKOUT NOW"
         android:textColor="@color/white"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lvCart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp" />
 </RelativeLayout>

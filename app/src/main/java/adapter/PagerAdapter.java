@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import main_fragment.CartFragment;
-import main_fragment.ContactFragment;
-import main_fragment.HomeFragment;
-import main_fragment.SearchFragment;
+import main_fragment.TabCartFragment;
+import main_fragment.TabContactFragment;
+import main_fragment.TabHomeFragment;
+import main_fragment.TabSearchFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     public PagerAdapter(FragmentManager fm) {
@@ -18,13 +18,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 1:
-                return new CartFragment();
+                return new TabCartFragment();
             case 2:
-                return new SearchFragment();
+                return new TabSearchFragment();
             case 3:
-                return new ContactFragment();
+                return new TabContactFragment();
             default:
-                return new HomeFragment();
+                return new TabHomeFragment();
         }
     }
 

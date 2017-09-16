@@ -18,14 +18,14 @@ import adapter.ListCategoryAdapter;
 import adapter.ProductAdapter;
 import models.Product;
 
-public class HomeFragment extends Fragment {
+public class ContentHomeFragment extends Fragment {
     RecyclerView lvProducts;
     ArrayList<Product> ds;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_content_home, container, false);
         ViewPager pager = view.findViewById(R.id.pagerCategory);
         ListCategoryAdapter adapter = new ListCategoryAdapter(view.getContext());
         pager.setAdapter(adapter);
@@ -47,7 +47,5 @@ public class HomeFragment extends Fragment {
         ds.add(new Product(1, "Falcao", 112, "http://192.168.20.116/BanHangKhoaPham/images/product/57.jpg"));
         ProductAdapter adapter = new ProductAdapter(ds, view.getContext());
         lvProducts.setAdapter(adapter);
-
-
     }
 }

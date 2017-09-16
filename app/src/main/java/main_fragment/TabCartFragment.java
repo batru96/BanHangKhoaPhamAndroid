@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import adapter.CartAdapter;
 import models.Cart;
 
-public class CartFragment extends Fragment {
+public class TabCartFragment extends Fragment {
 
     private RecyclerView lvCart;
     private ArrayList<Cart> ds;
@@ -27,7 +27,7 @@ public class CartFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_cart, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tab_cart, container, false);
         initControls(rootView);
         return rootView;
     }

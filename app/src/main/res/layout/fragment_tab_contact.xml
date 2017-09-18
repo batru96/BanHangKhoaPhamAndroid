@@ -41,8 +41,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="90 Le Thi Rieng / Ben Thanh"
-                android:textColor="@color/colorAccentDark"
-                android:textSize="16dp" />
+                android:textColor="@color/colorContact"
+                android:textSize="@dimen/contact_size" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -64,8 +64,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="(+84) 098 672 9636"
-                android:textColor="@color/colorAccentDark"
-                android:textSize="16dp" />
+                android:textColor="@color/colorContact"
+                android:textSize="@dimen/contact_size" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -87,8 +87,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="khoaphamtraining@gmail.com"
-                android:textColor="@color/colorAccentDark"
-                android:textSize="16dp" />
+                android:textColor="@color/colorContact"
+                android:textSize="@dimen/contact_size" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -110,8 +110,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="(+84) 0166 3314 116"
-                android:textColor="@color/colorAccentDark"
-                android:textSize="16dp" />
+                android:textColor="@color/colorContact"
+                android:textSize="@dimen/contact_size" />
         </RelativeLayout>
     </LinearLayout>
 

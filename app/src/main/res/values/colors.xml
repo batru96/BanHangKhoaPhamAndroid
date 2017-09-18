@@ -11,4 +11,5 @@
     <color name="backgroundMain">#d3d9d6</color>
     <color name="colorSignInActivity">#11d8b8</color>
     <color name="pinkColor">#d948d4</color>
+    <color name="colorContact">#AF1C60</color>
 </resources>

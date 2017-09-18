@@ -6,4 +6,8 @@
     <dimen name="logo_width">40dp</dimen>
     <dimen name="buttonPadding">16dp</dimen>
     <dimen name="button_text_size">24sp</dimen>
+    <dimen name="contact_size">16sp</dimen>
+    <dimen name="search_padding">8dp</dimen>
+    <dimen name="search_image_width">100dp</dimen>
+    <dimen name="search_image_height">150dp</dimen>
 </resources>

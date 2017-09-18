@@ -10,13 +10,12 @@ import com.example.gietb.banhangkhoapham.R;
 
 import java.util.ArrayList;
 
-import models.Cart;
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     private Context context;
-    private ArrayList<Cart> ds;
+    private ArrayList<String> ds;
 
-    public CartAdapter(Context context, ArrayList<Cart> ds) {
+    public SearchAdapter(Context context, ArrayList<String> ds) {
         this.context = context;
         this.ds = ds;
     }
@@ -24,8 +23,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_cart, parent, false);
-        return new ViewHolder(view);
+        View itemView = inflater.inflate(R.layout.item_search, parent, false);
+        return new ViewHolder(itemView);
     }
 
     @Override
@@ -35,10 +34,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return ds.size();
+        return 5;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder{
         ViewHolder(View itemView) {
             super(itemView);
         }

@@ -25,14 +25,17 @@ import java.util.ArrayList;
 
 import adapter.ListCategoryAdapter;
 import adapter.ProductAdapter;
+import models.Category;
 import models.Product;
 import singleton.DataUrl;
 import singleton.VolleySingleton;
 
 public class ContentHomeFragment extends Fragment {
-    RecyclerView lvProducts;
-    ArrayList<Product> ds;
+    private RecyclerView lvProducts;
+    private ArrayList<Product> ds;
 
+    private ViewPager pager;
+    private ListCategoryAdapter categoryAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,23 +46,32 @@ public class ContentHomeFragment extends Fragment {
     }
 
     private void initControls(final View view) {
-        ViewPager pager = view.findViewById(R.id.pagerCategory);
-        ListCategoryAdapter adapter = new ListCategoryAdapter(view.getContext());
-        pager.setAdapter(adapter);
-
+        pager = view.findViewById(R.id.pagerCategory);
         lvProducts = view.findViewById(R.id.lvProducts);
         lvProducts.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
         lvProducts.setLayoutManager(layoutManager);
 
-        ds = new ArrayList<>();
+        ds = new ArrayList<Product>();
 
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, DataUrl.indexUrl, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray typeObj = response.getJSONArray("type");
+                            JSONArray typeArray = response.getJSONArray("type");
+                            ArrayList<Category> dsCategory = new ArrayList<>();
+                            for (int i = 0; i < typeArray.length(); i++) {
+                                Category category = new Category();
+                                JSONObject typeObj = typeArray.getJSONObject(i);
+                                category.setId(typeObj.getInt("id"));
+                                category.setName(typeObj.getString("name"));
+                                category.setImage(typeObj.getString("image"));
+                                dsCategory.add(category);
+                            }
+                            categoryAdapter = new ListCategoryAdapter(view.getContext(), dsCategory);
+                            pager.setAdapter(categoryAdapter);
+
                             JSONArray productArray = response.getJSONArray("product");
                             for (int i = 0; i < productArray.length(); i++) {
                                 Product product = new Product();
@@ -75,7 +87,6 @@ public class ContentHomeFragment extends Fragment {
                                 JSONArray imageArray = obj.getJSONArray("images");
                                 String[] images = {imageArray.getString(0), imageArray.getString(1)};
                                 product.setImages(images);
-                                //product.setImages(obj.getJSONArray("images"));
                                 ds.add(product);
                             }
                             ProductAdapter productAdapter = new ProductAdapter(ds, view.getContext());

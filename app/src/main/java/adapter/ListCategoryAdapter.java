@@ -2,6 +2,7 @@ package adapter;
 
 import android.content.Context;
 import android.support.v4.view.*;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +11,28 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.gietb.banhangkhoapham.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
+import models.Category;
+import singleton.DataUrl;
+import singleton.VolleySingleton;
 
 public class ListCategoryAdapter extends android.support.v4.view.PagerAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private Integer[] images = {R.drawable.little, R.drawable.maxi, R.drawable.midi, R.drawable.fit, R.drawable.mini, R.drawable.party};
+    private ArrayList<Category> ds;
 
-    public ListCategoryAdapter(Context context) {
+    public ListCategoryAdapter(Context context, ArrayList<Category> ds) {
+        this.ds = ds;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return images.length;
+        return ds.size();
     }
 
     @Override
@@ -36,7 +45,10 @@ public class ListCategoryAdapter extends android.support.v4.view.PagerAdapter {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.custom_category, null);
         ImageButton imageView = view.findViewById(R.id.imageView);
-        imageView.setImageResource(images[position]);
+
+        String linkImage = DataUrl.imageTypeUrl + ds.get(position).getImage();
+        Log.d("III", linkImage);
+        Picasso.with(context).load(linkImage).into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

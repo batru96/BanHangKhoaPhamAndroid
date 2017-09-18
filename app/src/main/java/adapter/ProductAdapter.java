@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import models.Product;
+import singleton.DataUrl;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
@@ -46,7 +47,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Product product = ds.get(position);
         holder.tvPrice.setText(String.valueOf(product.getPrice()) + "$");
         holder.tvName.setText(product.getName());
-        Picasso.with(context).load(product.getUrl()).into(holder.btnImage);
+
+        String imageName = product.getImages()[0];
+        String[] splitStr = imageName.split("[.]");
+        String imageUrl = DataUrl.imageProductUrl + splitStr[0].concat(".jpg");
+        Picasso.with(context).load(imageUrl).into(holder.btnImage);
     }
 
     @Override

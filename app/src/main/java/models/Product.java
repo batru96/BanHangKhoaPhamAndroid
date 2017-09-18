@@ -1,18 +1,32 @@
 package models;
 
+import org.json.JSONArray;
+
 public class Product {
     private int id;
     private String name;
+    private int idType;
+    private String nameType;
     private int price;
-    private String url;
+    private String color;
+    private String material;
+    private String description;
+    private String[] images;
 
-    public Product() {}
+    public Product() {
 
-    public Product(int id, String name, int price, String url) {
+    }
+
+    public Product(int id, String name, int idType, String nameType, int price, String color, String material, String description, String[] images) {
         this.id = id;
         this.name = name;
+        this.idType = idType;
+        this.nameType = nameType;
         this.price = price;
-        this.url = url;
+        this.color = color;
+        this.material = material;
+        this.description = description;
+        this.images = images;
     }
 
     public int getId() {
@@ -31,6 +45,22 @@ public class Product {
         this.name = name;
     }
 
+    public int getIdType() {
+        return idType;
+    }
+
+    public void setIdType(int idType) {
+        this.idType = idType;
+    }
+
+    public String getNameType() {
+        return nameType;
+    }
+
+    public void setNameType(String nameType) {
+        this.nameType = nameType;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -39,11 +69,35 @@ public class Product {
         this.price = price;
     }
 
-    public String getUrl() {
-        return url;
+    public String getColor() {
+        return color;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String[] getImages() {
+        return images;
+    }
+
+    public void setImages(String[] images) {
+        this.images = images;
     }
 }

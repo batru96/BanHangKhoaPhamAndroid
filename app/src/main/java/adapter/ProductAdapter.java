@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gietb.banhangkhoapham.R;
@@ -26,7 +27,6 @@ import models.Product;
 import singleton.DataUrl;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-
     private ArrayList<Product> ds;
     private Context context;
 
@@ -51,7 +51,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         String imageName = product.getImages()[0];
         String[] splitStr = imageName.split("[.]");
         String imageUrl = DataUrl.imageProductUrl + splitStr[0].concat(".jpg");
-        Picasso.with(context).load(imageUrl).into(holder.btnImage);
+        Picasso.with(context).load(imageUrl).into(holder.imageView);
     }
 
     @Override
@@ -60,12 +60,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageButton btnImage;
+        ImageView imageView;
         TextView tvName, tvPrice;
 
         ViewHolder(View itemView) {
             super(itemView);
-            btnImage = itemView.findViewById(R.id.productImage);
+            imageView = itemView.findViewById(R.id.productImage);
             tvName = itemView.findViewById(R.id.nameProduct);
             tvPrice = itemView.findViewById(R.id.priceProduct);
         }

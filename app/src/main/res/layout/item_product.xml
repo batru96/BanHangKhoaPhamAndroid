@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="8dp"
     android:orientation="vertical"
     android:paddingBottom="8dp"
-    android:paddingEnd="4dp"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp"
-    android:paddingStart="4dp"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    app:layout_goneMarginBottom="8dp">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/productImage"
-        android:src="@drawable/custom_image_click"
         android:layout_width="208dp"
         android:layout_height="260dp"
         android:layout_marginBottom="8dp"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textColor="#e434b8"
+        android:textColor="@color/colorContact"
         android:textSize="24sp"
         tools:text="124$" />
 

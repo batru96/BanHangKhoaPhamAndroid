@@ -1,7 +1,8 @@
 package singleton;
 
 public class DataUrl {
-    public static String indexUrl = "http://192.168.1.104/khoapham_ban_hang/app/index.php";
-    public static String imageProductUrl = "http://192.168.1.104/khoapham_ban_hang/app/images/product/";
-    public static String imageTypeUrl = "http://192.168.1.104/khoapham_ban_hang/app/images/type/";
+    private static String ipaddress = "10.10.9.140";
+    public static String indexUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/index.php";
+    public static String imageProductUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/images/product/";
+    public static String imageTypeUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/images/type/";
 }

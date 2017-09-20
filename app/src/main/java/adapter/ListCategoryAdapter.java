@@ -47,7 +47,6 @@ public class ListCategoryAdapter extends android.support.v4.view.PagerAdapter {
         ImageButton imageView = view.findViewById(R.id.imageView);
 
         String linkImage = DataUrl.imageTypeUrl + ds.get(position).getImage();
-        Log.d("III", linkImage);
         Picasso.with(context).load(linkImage).into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

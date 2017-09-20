@@ -17,6 +17,13 @@ public class Product {
 
     }
 
+    public Product(int id, String name, int price, String[] images) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.images = images;
+    }
+
     public Product(int id, String name, int idType, String nameType, int price, String color, String material, String description, String[] images) {
         this.id = id;
         this.name = name;

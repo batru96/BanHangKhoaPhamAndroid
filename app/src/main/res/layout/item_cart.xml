@@ -9,9 +9,9 @@
     android:padding="8dp">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:background="@color/colorPrimary" />
+        android:id="@+id/productImage"
+        android:layout_width="120dp"
+        android:layout_height="150dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,23 +25,24 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/nameCartProductText"
+                android:id="@+id/nameProductText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lace Sleeve Si"
                 android:textSize="24sp" />
 
             <ImageButton
-                android:src="@drawable/ic_remove"
-                android:background="@drawable/custom_remove_button"
                 android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:background="@drawable/custom_remove_button"
+                android:src="@drawable/ic_remove" />
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/productPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -54,6 +55,7 @@
             android:layout_alignParentBottom="true">
 
             <Button
+                android:id="@+id/detailButton"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
@@ -70,6 +72,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/minusButton"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -79,6 +82,7 @@
                     android:textSize="24sp" />
 
                 <TextView
+                    android:id="@+id/counterText"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
@@ -88,6 +92,7 @@
                     android:textSize="24sp" />
 
                 <Button
+                    android:id="@+id/plusButton"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"

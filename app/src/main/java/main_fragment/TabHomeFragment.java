@@ -35,11 +35,14 @@ import models.Product;
 import singleton.DataUrl;
 import singleton.VolleySingleton;
 
-public class TabHomeFragment extends Fragment {
-    private RecyclerView lvProducts;
-    private ArrayList<Product> ds;
+public class TabHomeFragment extends Fragment implements ProductAdapter.ClickListener {
     private ViewPager pager;
+    private ArrayList<Category> dsCategory;
     private ListCategoryAdapter categoryAdapter;
+
+    private RecyclerView lvProducts;
+    private ArrayList<Product> dsProduct;
+    private ProductAdapter productAdapter;
 
     @Nullable
     @Override
@@ -55,16 +58,21 @@ public class TabHomeFragment extends Fragment {
         lvProducts.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
         lvProducts.setLayoutManager(layoutManager);
+        dsCategory = new ArrayList<>();
+        categoryAdapter = new ListCategoryAdapter(view.getContext(), dsCategory);
+        pager.setAdapter(categoryAdapter);
 
-        ds = new ArrayList<Product>();
+        dsProduct = new ArrayList<Product>();
+        productAdapter = new ProductAdapter(dsProduct, view.getContext());
+        productAdapter.setClickListener(this);
+        lvProducts.setAdapter(productAdapter);
 
-        final JsonObjectRequest jsObjRequest = new JsonObjectRequest
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, DataUrl.indexUrl, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray typeArray = response.getJSONArray("type");
-                            ArrayList<Category> dsCategory = new ArrayList<>();
                             for (int i = 0; i < typeArray.length(); i++) {
                                 Category category = new Category();
                                 JSONObject typeObj = typeArray.getJSONObject(i);
@@ -73,8 +81,7 @@ public class TabHomeFragment extends Fragment {
                                 category.setImage(typeObj.getString("image"));
                                 dsCategory.add(category);
                             }
-                            categoryAdapter = new ListCategoryAdapter(view.getContext(), dsCategory);
-                            pager.setAdapter(categoryAdapter);
+                            categoryAdapter.notifyDataSetChanged();
 
                             JSONArray productArray = response.getJSONArray("product");
                             for (int i = 0; i < productArray.length(); i++) {
@@ -89,12 +96,14 @@ public class TabHomeFragment extends Fragment {
                                 product.setDescription(obj.getString("description"));
 
                                 JSONArray imageArray = obj.getJSONArray("images");
-                                String[] images = {imageArray.getString(0), imageArray.getString(1)};
+                                String[] images = {
+                                        DataUrl.imageProductUrl + imageArray.getString(0),
+                                        DataUrl.imageProductUrl + imageArray.getString(1)
+                                };
                                 product.setImages(images);
-                                ds.add(product);
+                                dsProduct.add(product);
                             }
-                            ProductAdapter productAdapter = new ProductAdapter(ds, view.getContext());
-                            lvProducts.setAdapter(productAdapter);
+
                         } catch (JSONException e) {
                             Log.d("REQUEST_DATA", e.getMessage());
                         }
@@ -107,5 +116,10 @@ public class TabHomeFragment extends Fragment {
                     }
                 });
         VolleySingleton.getInstance(view.getContext()).addToRequestQueue(jsObjRequest);
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+        startActivity(new Intent(getContext(), ActivityDetail.class));
     }
 }

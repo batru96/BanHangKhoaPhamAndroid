@@ -2,17 +2,25 @@ package adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.gietb.banhangkhoapham.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import models.Cart;
+import models.Product;
+import singleton.DataUrl;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Cart> ds;
 
@@ -30,7 +38,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        Cart cart = ds.get(position);
+        Picasso.with(context).load(cart.getImages()[0]).into(holder.imgProduct);
+        holder.tvPrice.setText(String.valueOf(cart.getPrice()).concat(" $"));
+        holder.tvName.setText(cart.getName());
+        holder.tvCounting.setText(String.valueOf(cart.getCounting()));
     }
 
     @Override
@@ -39,8 +51,21 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imgProduct;
+        TextView tvName, tvPrice, tvCounting, btnDetail;
+        ImageButton btnRemove;
+        Button btnMinus, btnPlus;
+
         ViewHolder(View itemView) {
             super(itemView);
+            imgProduct = itemView.findViewById(R.id.productImage);
+            tvName = itemView.findViewById(R.id.nameProductText);
+            tvPrice = itemView.findViewById(R.id.productPrice);
+            tvCounting = itemView.findViewById(R.id.counterText);
+            btnDetail = itemView.findViewById(R.id.detailButton);
+            btnRemove = itemView.findViewById(R.id.deleteButton);
+            btnMinus = itemView.findViewById(R.id.minusButton);
+            btnPlus = itemView.findViewById(R.id.plusButton);
         }
     }
 }

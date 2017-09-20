@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import adapter.CartAdapter;
 import models.Cart;
+import models.Product;
 
 public class TabCartFragment extends Fragment {
 
@@ -37,9 +38,14 @@ public class TabCartFragment extends Fragment {
         lvCart = view.findViewById(R.id.lvCart);
         lvCart.setHasFixedSize(true);
         ds = new ArrayList<>();
-        ds.add(new Cart("1"));
-        ds.add(new Cart("2"));
-        ds.add(new Cart("3"));
+        String[] aaa = {
+        "http://192.168.0.106/khoapham_ban_hang/app/images/product/59.jpg", "http://192.168.0.106/khoapham_ban_hang/app/images/product/59.jpg"};
+        ;
+        ds.add(new Cart(1, "Name", 123, aaa, 3));
+        ds.add(new Cart(2, "Name", 123, aaa, 3));
+        ds.add(new Cart(3, "Name", 123, aaa, 3));
+        ds.add(new Cart(4, "Name", 123, aaa, 3));
+
         adapter = new CartAdapter(view.getContext(), ds);
         lvCart.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         lvCart.setAdapter(adapter);

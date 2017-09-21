@@ -14,10 +14,12 @@ import com.example.gietb.banhangkhoapham.R;
 import java.util.ArrayList;
 
 import adapter.SearchAdapter;
+import models.Product;
 
 public class TabSearchFragment extends Fragment {
 
     private RecyclerView lvSearch;
+    private ArrayList<Product> ds;
     private SearchAdapter adapter;
 
     @Nullable
@@ -31,9 +33,19 @@ public class TabSearchFragment extends Fragment {
 
     private void initControls(View view) {
         lvSearch = view.findViewById(R.id.listSearch);
-        adapter = new SearchAdapter(view.getContext(), new ArrayList<String>());
         lvSearch.setHasFixedSize(true);
-        lvSearch.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+        lvSearch.setLayoutManager(new LinearLayoutManager(view.getContext(),
+                LinearLayoutManager.VERTICAL, false));
+        ds = new ArrayList<>();
+        String[] aaa = {
+                "http://192.168.0.106/khoapham_ban_hang/app/images/product/59.jpg", "http://192.168.0.106/khoapham_ban_hang/app/images/product/59.jpg"};
+        ;
+        ds.add(new Product(1, "Ronaldo", 192, "Red and blue", "Material color design", aaa));
+        ds.add(new Product(1, "Ronaldo", 192, "Red and blue", "Material color design", aaa));
+        ds.add(new Product(1, "Ronaldo", 192, "Red and blue", "Material color design", aaa));
+        ds.add(new Product(1, "Ronaldo", 192, "Red and blue", "Material color design", aaa));
+
+        adapter = new SearchAdapter(view.getContext(), ds);
         lvSearch.setAdapter(adapter);
     }
 }

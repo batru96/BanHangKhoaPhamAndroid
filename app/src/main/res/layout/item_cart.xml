@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/productImage"
-        android:layout_width="120dp"
-        android:layout_height="150dp" />
+        android:layout_width="@dimen/image_search_width"
+        android:layout_height="@dimen/image_search_height" />
 
     <RelativeLayout
         android:layout_width="match_parent"

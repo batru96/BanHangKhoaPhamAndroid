@@ -11,4 +11,6 @@
     <dimen name="image_search_width">120dp</dimen>
     <dimen name="image_search_height">150dp</dimen>
     <dimen name="search_text_size">20sp</dimen>
+    <dimen name="image_detail_width">204dp</dimen>
+    <dimen name="image_detail_height">255dp</dimen>
 </resources>

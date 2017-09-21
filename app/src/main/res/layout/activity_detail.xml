@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundMain"
@@ -41,29 +42,37 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <ImageButton
-                android:layout_width="204dp"
-                android:layout_height="255dp"
+            <ImageView
+                android:id="@+id/image_detail_1"
+                android:layout_width="@dimen/image_detail_width"
+                android:layout_height="@dimen/image_detail_height"
                 android:layout_marginEnd="8dp"
-                android:background="@color/colorPrimary" />
+                android:contentDescription="@string/failed" />
 
-            <ImageButton
-                android:layout_width="204dp"
-                android:layout_height="255dp"
-                android:background="@color/colorAccent" />
+            <ImageView
+                android:id="@+id/image_detail_2"
+                android:layout_width="@dimen/image_detail_width"
+                android:layout_height="@dimen/image_detail_height"
+                android:contentDescription="@string/failed" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/nameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="BLACK OF THE QUEEN / 124$"
-            android:textColor="@color/black" />
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            tools:text="BLACK OF THE QUEEN / 124$" />
 
         <TextView
+            android:padding="16dp"
+            android:id="@+id/decriptionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Function Programing is not easy way to success. But you know, it's a cool ways to do that. Function Programing is not easy way to success. But you know, it's a cool waysFunction Programing is not easy way to success. But you know, it's a cool waysFunction Programing is not easy way to success. But you know, it's a cool waysFunction Programing is not easy way to success. But you know, it's a cool waysFunction Programing is not easy way to success. But you know, it's a cool waysFunction Programing is not easy way to success. But you know, it's a cool waysFunction Programing is not easy way to success. But you know, it's a cool ways" />
+            android:textSize="20sp"
+            tools:text="something special"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -73,16 +82,20 @@
             android:padding="16dp">
 
             <TextView
+                android:textSize="24sp"
+                android:id="@+id/materialText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Material leather"
+                tools:text="Material leather"
                 android:textColor="@color/colorAccent" />
 
             <TextView
+                android:textSize="24sp"
+                android:id="@+id/colorText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Color khaleesi"
+                tools:text="Color khaleesi"
                 android:textColor="@color/colorAccent" />
         </RelativeLayout>
     </LinearLayout>

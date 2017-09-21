@@ -51,12 +51,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Product product = ds.get(position);
-        holder.tvPrice.setText(String.valueOf(product.getPrice()) + "$");
+        holder.tvPrice.setText(String.valueOf(product.getPrice()).concat(" $"));
         holder.tvName.setText(product.getName());
-
-        String imageUrl = product.getImages()[0];
-        imageUrl = imageUrl.replaceAll("jpeg", "jpg");
-        Picasso.with(context).load(imageUrl).into(holder.imageView);
+        Picasso.with(context).load(product.getImages()[0]).into(holder.imageView);
     }
 
     @Override

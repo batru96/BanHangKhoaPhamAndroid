@@ -100,6 +100,10 @@ public class TabHomeFragment extends Fragment implements ProductAdapter.ClickLis
                                         DataUrl.imageProductUrl + imageArray.getString(0),
                                         DataUrl.imageProductUrl + imageArray.getString(1)
                                 };
+                                for (int idx = 0; idx < images.length; idx++) {
+                                    String imageUrl = images[idx];
+                                    images[idx] = imageUrl.replaceAll("jpeg", "jpg");
+                                }
                                 product.setImages(images);
                                 dsProduct.add(product);
                             }
@@ -120,6 +124,9 @@ public class TabHomeFragment extends Fragment implements ProductAdapter.ClickLis
 
     @Override
     public void itemClicked(View view, int position) {
-        startActivity(new Intent(getContext(), ActivityDetail.class));
+        Product product = dsProduct.get(position);
+        Intent intent = new Intent(getContext(), ActivityDetail.class);
+        intent.putExtra("PRODUCT", product);
+        startActivity(intent);
     }
 }

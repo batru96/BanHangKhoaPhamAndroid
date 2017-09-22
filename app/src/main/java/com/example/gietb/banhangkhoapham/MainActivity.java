@@ -79,6 +79,12 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
                 SharedPreferences.Editor editor = pre.edit();
                 editor.putString("SEARCH_JSON_ARRAY", response.toString());
                 editor.apply();
+                if (viewPager.getCurrentItem() != 2) {
+                    viewPager.setCurrentItem(2);
+                } else {
+                    // Tab search dang hien thi, hay thay doi du lieu trong do neu co the
+
+                }
             }
         }, new Response.ErrorListener() {
             @Override

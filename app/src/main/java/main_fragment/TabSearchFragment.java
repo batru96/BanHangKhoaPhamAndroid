@@ -24,7 +24,7 @@ import adapter.SearchAdapter;
 import models.Product;
 import singleton.DataUrl;
 
-public class TabSearchFragment extends Fragment {
+public class TabSearchFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private RecyclerView lvSearch;
     private ArrayList<Product> ds;
@@ -35,14 +35,10 @@ public class TabSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_search, container, false);
         initControls(view);
-        readData();
         return view;
     }
 
-    private void readData() {
-        SharedPreferences pre = getContext().getSharedPreferences("DATA_VALUE", Context.MODE_PRIVATE);
-        String valueStr = pre.getString("SEARCH_JSON_ARRAY", "[]");
-
+    private void readData(String valueStr) {
         try {
             JSONArray jsonArray = new JSONArray(valueStr);
             if (jsonArray.length() != 0) {
@@ -76,5 +72,17 @@ public class TabSearchFragment extends Fragment {
         ds = new ArrayList<>();
         adapter = new SearchAdapter(view.getContext(), ds);
         lvSearch.setAdapter(adapter);
+
+        SharedPreferences pre = getContext().getSharedPreferences("DATA_VALUE", Context.MODE_PRIVATE);
+        String valueStr = pre.getString("SEARCH_JSON_ARRAY", "[]");
+        readData(valueStr);
+        pre.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        String valueChanged = sharedPreferences.getString(s, "[]");
+        ds.clear();
+        readData(valueChanged);
     }
 }

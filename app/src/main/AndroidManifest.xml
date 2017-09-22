@@ -20,7 +20,7 @@
         <activity android:name=".SignInOutActivity" />
         <activity android:name=".OrderHistoryActivity" />
         <activity android:name=".ChangeInfoActivity" />
-        <activity android:name=".ActivityDetail" />
+        <activity android:name=".DetailActivity" />
     </application>
 
 </manifest>

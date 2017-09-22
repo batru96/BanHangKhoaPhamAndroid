@@ -16,7 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.gietb.banhangkhoapham.ActivityDetail;
+import com.example.gietb.banhangkhoapham.DetailActivity;
 import com.example.gietb.banhangkhoapham.R;
 
 import org.json.JSONArray;
@@ -94,14 +94,7 @@ public class TabHomeFragment extends Fragment implements ProductAdapter.ClickLis
                                 product.setDescription(obj.getString("description"));
 
                                 JSONArray imageArray = obj.getJSONArray("images");
-                                String[] images = {
-                                        DataUrl.imageProductUrl + imageArray.getString(0),
-                                        DataUrl.imageProductUrl + imageArray.getString(1)
-                                };
-                                for (int idx = 0; idx < images.length; idx++) {
-                                    String imageUrl = images[idx];
-                                    images[idx] = imageUrl.replaceAll("jpeg", "jpg");
-                                }
+                                String[] images = DataUrl.convertJsonImgArrToStrArr(imageArray);
                                 product.setImages(images);
                                 dsProduct.add(product);
                             }
@@ -122,7 +115,7 @@ public class TabHomeFragment extends Fragment implements ProductAdapter.ClickLis
     @Override
     public void itemClicked(View view, int position) {
         Product product = dsProduct.get(position);
-        Intent intent = new Intent(getContext(), ActivityDetail.class);
+        Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("PRODUCT", product);
         startActivity(intent);
     }

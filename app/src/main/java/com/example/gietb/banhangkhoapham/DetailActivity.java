@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import models.Product;
 
-public class ActivityDetail extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
     ImageButton btnBack;
 
     @Override

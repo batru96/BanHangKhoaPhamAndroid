@@ -2,28 +2,45 @@ package com.example.gietb.banhangkhoapham;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
 
 import adapter.PagerAdapter;
 import drawer.ISendButton;
 import drawer.SignInDrawerFragment;
 import drawer.SignOutDrawerFragment;
+import singleton.DataUrl;
+import singleton.VolleySingleton;
 
 public class MainActivity extends AppCompatActivity implements ISendButton {
 
     private DrawerLayout mDrawerLayout;
     private ViewPager viewPager;
     private ImageButton btnDrawer;
+
+    private EditText edtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +55,38 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
         tabLayout.setupWithViewPager(viewPager);
 
         initControls();
+        createEvents();
+    }
+
+    private void createEvents() {
+        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    search(edtSearch.getText().toString());
+                }
+                return false;
+            }
+        });
+    }
+
+    private void search(String name) {
+        String url = DataUrl.searchProductUrl + name;
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                SharedPreferences pre = getSharedPreferences("DATA_VALUE", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pre.edit();
+                editor.putString("SEARCH_JSON_ARRAY", response.toString());
+                editor.apply();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("VOLLEY", error.getMessage());
+            }
+        });
+        VolleySingleton.getInstance(this).addToRequestQueue(arrayRequest);
     }
 
     private void initControls() {
@@ -50,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
             }
         });
         changeDrawer(null);
+        
+        edtSearch = findViewById(R.id.searchInput);
     }
 
     @Override

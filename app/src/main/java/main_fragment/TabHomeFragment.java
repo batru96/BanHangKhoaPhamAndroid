@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,10 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -52,20 +49,21 @@ public class TabHomeFragment extends Fragment implements ProductAdapter.ClickLis
         return view;
     }
 
-    private void initControls(final View view) {
+    private void initControls(View view) {
         pager = view.findViewById(R.id.pagerCategory);
-        lvProducts = view.findViewById(R.id.lvProducts);
-        lvProducts.setHasFixedSize(true);
-        GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
-        lvProducts.setLayoutManager(layoutManager);
         dsCategory = new ArrayList<>();
         categoryAdapter = new ListCategoryAdapter(view.getContext(), dsCategory);
         pager.setAdapter(categoryAdapter);
 
-        dsProduct = new ArrayList<Product>();
-        productAdapter = new ProductAdapter(dsProduct, view.getContext());
+        lvProducts = view.findViewById(R.id.lvProducts);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        lvProducts.setLayoutManager(layoutManager);
+        lvProducts.setHasFixedSize(true);
+        dsProduct = new ArrayList<>();
+        productAdapter = new ProductAdapter(dsProduct, getContext());
         productAdapter.setClickListener(this);
         lvProducts.setAdapter(productAdapter);
+
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, DataUrl.indexUrl, null, new Response.Listener<JSONObject>() {
@@ -107,13 +105,12 @@ public class TabHomeFragment extends Fragment implements ProductAdapter.ClickLis
                                 product.setImages(images);
                                 dsProduct.add(product);
                             }
-
+                            productAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             Log.d("REQUEST_DATA", e.getMessage());
                         }
                     }
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("VOLLEY", error.getMessage());

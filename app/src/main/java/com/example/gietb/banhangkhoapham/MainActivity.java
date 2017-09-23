@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
 
         initControls();
         createEvents();
+        createDatabase();
     }
 
     private void createEvents() {
@@ -145,5 +146,9 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
     @Override
     public void sendButton(Button button) {
         changeDrawer(button);
+    }
+
+    private void createDatabase() {
+
     }
 }

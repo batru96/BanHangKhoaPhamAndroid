@@ -1,8 +1,12 @@
 package models;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
+
+import singleton.DataUrl;
 
 public class Product implements Serializable{
     private int id;
@@ -17,15 +21,6 @@ public class Product implements Serializable{
 
     public Product() {
 
-    }
-
-    public Product(int id, String name, int price, String color, String material, String[] images) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.color = color;
-        this.material = material;
-        this.images = images;
     }
 
     public Product(int id, String name, int price, String[] images) {
@@ -45,6 +40,27 @@ public class Product implements Serializable{
         this.material = material;
         this.description = description;
         this.images = images;
+    }
+
+    public Product(JSONObject obj) {
+        try {
+            this.setId(obj.getInt("id"));
+            this.setName(obj.getString("name"));
+            try {
+                this.setIdType(obj.getInt("idType"));
+            } catch (Exception e){
+                this.setIdType(obj.getInt("id_type"));
+            }
+            this.setPrice(obj.getInt("price"));
+            this.setColor(obj.getString("color"));
+            this.setMaterial(obj.getString("material"));
+            this.setDescription(obj.getString("description"));
+            JSONArray imageArray = obj.getJSONArray("images");
+            String[] images = DataUrl.convertJsonImgArrToStrArr(imageArray);
+            this.setImages(images);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getId() {

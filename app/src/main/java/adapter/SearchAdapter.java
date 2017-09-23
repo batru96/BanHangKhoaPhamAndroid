@@ -2,6 +2,7 @@ package adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,18 @@ import java.util.ArrayList;
 
 import models.Product;
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
-
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
     private Context context;
     private ArrayList<Product> ds;
+    private IClickListener clickListener;
 
     public SearchAdapter(Context context, ArrayList<Product> ds) {
         this.context = context;
         this.ds = ds;
+    }
+
+    public void setClickListener(IClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -48,7 +53,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return ds.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imgSearch;
         TextView tvName, tvPrice, tvMaterial, tvColor;
 
@@ -59,6 +64,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             tvPrice = itemView.findViewById(R.id.priceText);
             tvMaterial = itemView.findViewById(R.id.materialText);
             tvColor = itemView.findViewById(R.id.colorText);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (clickListener != null) {
+                clickListener.itemClick(view, getPosition());
+            }
         }
     }
 }

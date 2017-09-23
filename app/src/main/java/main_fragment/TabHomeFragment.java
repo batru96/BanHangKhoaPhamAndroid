@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import adapter.IClickListener;
 import adapter.ListCategoryAdapter;
 import adapter.ProductAdapter;
 import models.Category;
@@ -32,7 +33,7 @@ import models.Product;
 import singleton.DataUrl;
 import singleton.VolleySingleton;
 
-public class TabHomeFragment extends Fragment implements ProductAdapter.ClickListener {
+public class TabHomeFragment extends Fragment implements IClickListener {
     private ViewPager pager;
     private ArrayList<Category> dsCategory;
     private ListCategoryAdapter categoryAdapter;
@@ -83,20 +84,8 @@ public class TabHomeFragment extends Fragment implements ProductAdapter.ClickLis
 
                             JSONArray productArray = response.getJSONArray("product");
                             for (int i = 0; i < productArray.length(); i++) {
-                                Product product = new Product();
                                 JSONObject obj = productArray.getJSONObject(i);
-                                product.setId(obj.getInt("id"));
-                                product.setName(obj.getString("name"));
-                                product.setIdType(obj.getInt("idType"));
-                                product.setPrice(obj.getInt("price"));
-                                product.setColor(obj.getString("color"));
-                                product.setMaterial(obj.getString("material"));
-                                product.setDescription(obj.getString("description"));
-
-                                JSONArray imageArray = obj.getJSONArray("images");
-                                String[] images = DataUrl.convertJsonImgArrToStrArr(imageArray);
-                                product.setImages(images);
-                                dsProduct.add(product);
+                                dsProduct.add(new Product(obj));
                             }
                             productAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
@@ -113,7 +102,7 @@ public class TabHomeFragment extends Fragment implements ProductAdapter.ClickLis
     }
 
     @Override
-    public void itemClicked(View view, int position) {
+    public void itemClick(View view, int position) {
         Product product = dsProduct.get(position);
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("PRODUCT", product);

@@ -18,14 +18,14 @@ import models.Product;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private ArrayList<Product> ds;
     private Context context;
-    private ClickListener clickListener;
+    private IClickListener clickListener;
 
     public ProductAdapter(ArrayList<Product> ds, Context context) {
         this.ds = ds;
         this.context = context;
     }
 
-    public void setClickListener(ClickListener clickListener) {
+    public void setClickListener(IClickListener clickListener) {
         this.clickListener = clickListener;
     }
     @Override
@@ -63,12 +63,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         @Override
         public void onClick(View view) {
             if (clickListener != null) {
-                clickListener.itemClicked(view, getPosition());
+                clickListener.itemClick(view, getPosition());
             }
         }
-    }
-
-    public interface ClickListener {
-        void itemClicked(View view, int position);
     }
 }

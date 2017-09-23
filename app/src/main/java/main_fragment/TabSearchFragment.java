@@ -1,17 +1,20 @@
 package main_fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.gietb.banhangkhoapham.DetailActivity;
 import com.example.gietb.banhangkhoapham.R;
 
 import org.json.JSONArray;
@@ -20,11 +23,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import adapter.IClickListener;
 import adapter.SearchAdapter;
 import models.Product;
 import singleton.DataUrl;
 
-public class TabSearchFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class TabSearchFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener, IClickListener {
 
     private RecyclerView lvSearch;
     private ArrayList<Product> ds;
@@ -44,18 +48,7 @@ public class TabSearchFragment extends Fragment implements SharedPreferences.OnS
             if (jsonArray.length() != 0) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject productObj = jsonArray.getJSONObject(i);
-                    Product product = new Product();
-                    product.setId(productObj.getInt("id"));
-                    product.setName(productObj.getString("name"));
-                    product.setPrice(productObj.getInt("price"));
-                    product.setMaterial(productObj.getString("material"));
-                    product.setColor(productObj.getString("color"));
-
-                    JSONArray imgArray = productObj.getJSONArray("images");
-                    String[] images = DataUrl.convertJsonImgArrToStrArr(imgArray);
-                    product.setImages(images);
-
-                    ds.add(product);
+                    ds.add(new Product(productObj));
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -71,6 +64,7 @@ public class TabSearchFragment extends Fragment implements SharedPreferences.OnS
                 LinearLayoutManager.VERTICAL, false));
         ds = new ArrayList<>();
         adapter = new SearchAdapter(view.getContext(), ds);
+        adapter.setClickListener(this);
         lvSearch.setAdapter(adapter);
 
         SharedPreferences pre = getContext().getSharedPreferences("DATA_VALUE", Context.MODE_PRIVATE);
@@ -84,5 +78,13 @@ public class TabSearchFragment extends Fragment implements SharedPreferences.OnS
         String valueChanged = sharedPreferences.getString(s, "[]");
         ds.clear();
         readData(valueChanged);
+    }
+
+    @Override
+    public void itemClick(View view, int position) {
+        Product product = ds.get(position);
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra("PRODUCT", product);
+        startActivity(intent);
     }
 }

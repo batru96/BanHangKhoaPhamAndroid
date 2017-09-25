@@ -27,15 +27,17 @@ import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+
 import adapter.PagerAdapter;
 import drawer.ISendButton;
 import drawer.SignInDrawerFragment;
 import drawer.SignOutDrawerFragment;
+import models.Cart;
 import singleton.DataUrl;
 import singleton.VolleySingleton;
 
 public class MainActivity extends AppCompatActivity implements ISendButton {
-
     private DrawerLayout mDrawerLayout;
     private ViewPager viewPager;
     private ImageButton btnDrawer;

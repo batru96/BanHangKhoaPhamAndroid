@@ -69,7 +69,10 @@ public class TabCartFragment extends Fragment {
                 for (Cart item : ds) {
                     money += item.getPrice() * item.getCounting();
                 }
-                btnCheckOut.setText("TOTAL " + money + "$ CHECKOUT NOW");
+                if (money != 0)
+                    btnCheckOut.setText("TOTAL " + money + "$ CHECKOUT NOW");
+                else
+                    btnCheckOut.setText("EMPTY");
             }
         });
     }

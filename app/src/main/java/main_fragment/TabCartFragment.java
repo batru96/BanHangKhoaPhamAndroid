@@ -26,8 +26,8 @@ import models.Product;
 public class TabCartFragment extends Fragment {
 
     private RecyclerView lvCart;
-    private ArrayList<Cart> ds;
-    private CartAdapter adapter;
+    public static ArrayList<Cart> ds;
+    public static CartAdapter adapter;
 
     @Nullable
     @Override
@@ -45,7 +45,7 @@ public class TabCartFragment extends Fragment {
             cart.setId(cursor.getInt(0));
             cart.setName(cursor.getString(1));
             cart.setPrice(cursor.getInt(2));
-            cart.setImages(new String[] {cursor.getString(3), cursor.getString(4)});
+            cart.setImages(new String[]{cursor.getString(3), cursor.getString(4)});
             cart.setCounting(cursor.getInt(5));
             ds.add(cart);
         }
@@ -53,12 +53,24 @@ public class TabCartFragment extends Fragment {
     }
 
     private void initControls(View view) {
-        Button btnCheckOut = view.findViewById(R.id.buttonCheckOut);
+        final Button btnCheckOut = view.findViewById(R.id.buttonCheckOut);
         lvCart = view.findViewById(R.id.lvCart);
         lvCart.setHasFixedSize(true);
         ds = new ArrayList<>();
         adapter = new CartAdapter(view.getContext(), ds);
         lvCart.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         lvCart.setAdapter(adapter);
+
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                int money = 0;
+                for (Cart item : ds) {
+                    money += item.getPrice() * item.getCounting();
+                }
+                btnCheckOut.setText("TOTAL " + money + "$ CHECKOUT NOW");
+            }
+        });
     }
 }

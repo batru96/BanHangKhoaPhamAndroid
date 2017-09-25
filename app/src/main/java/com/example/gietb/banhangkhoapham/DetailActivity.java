@@ -2,6 +2,7 @@ package com.example.gietb.banhangkhoapham;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 import com.example.gietb.banhangkhoapham.R;
 import com.squareup.picasso.Picasso;
 
+import main_fragment.TabCartFragment;
+import models.Cart;
 import models.Product;
 
 public class DetailActivity extends AppCompatActivity {
@@ -62,7 +65,13 @@ public class DetailActivity extends AppCompatActivity {
         values.put("Counting", 1);
 
         SQLiteDatabase db = MainActivity.database.getWritableDatabase();
-        db.insert(MainActivity.tableCartName, null, values);
+        long isSuccess = db.insert(MainActivity.tableCartName, null, values);
+        if (isSuccess == -1) {
+            return;
+        }
+        Cart cart = new Cart(product.getId(), product.getName(), product.getPrice(), product.getImages(), 1);
+        TabCartFragment.ds.add(cart);
+        TabCartFragment.adapter.notifyDataSetChanged();
     }
 
     private void initControls(Product product) {
@@ -87,6 +96,6 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, MainActivity.class));
+        super.onBackPressed();
     }
 }

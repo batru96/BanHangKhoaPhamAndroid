@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,7 +54,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return ds.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imgProduct;
         TextView tvName, tvPrice, tvCounting, btnDetail;
         ImageButton btnRemove;
@@ -74,6 +75,30 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     removeItem(view);
+                }
+            });
+            btnPlus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getPosition();
+                    int counting = Integer.parseInt((String) tvCounting.getText()) + 1;
+                    ds.get(position).setCounting(counting);
+                    tvCounting.setText(String.valueOf(counting));
+                    notifyDataSetChanged();
+                }
+            });
+
+            btnMinus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getPosition();
+                    int counting = Integer.parseInt((String) tvCounting.getText());
+                    if (counting >= 2) {
+                        counting--;
+                        ds.get(position).setCounting(counting);
+                        tvCounting.setText(String.valueOf(counting));
+                        notifyDataSetChanged();
+                    }
                 }
             });
         }

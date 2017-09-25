@@ -130,8 +130,8 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
         Fragment fragment = null;
         String tag = null;
         if (view == null) {
-            fragment = new SignOutDrawerFragment();
-            fragmentTransaction.replace(R.id.frameDrawer, fragment, "SIGN_OUT");
+            fragment = new SignInDrawerFragment();
+            fragmentTransaction.replace(R.id.frameDrawer, fragment, "SIGN_IN");
             fragmentTransaction.commit();
             return;
         }
@@ -168,10 +168,5 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
                 "ImageUrl2 VARCHAR(1000) NOT NULL," +
                 "Counting INTEGER NOT NULL" +
                 ")");
-//
-//        Cursor cursor = database.getData("SELECT * FROM " + tableCartName);
-//        while (cursor.moveToNext()) {
-//            Toast.makeText(this, cursor.getString(1), Toast.LENGTH_SHORT).show();
-//        }
     }
 }

@@ -82,6 +82,10 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void addProductToCart(Product product) {
+        if (product.getName().equals("null")) {
+            Toast.makeText(this, "Sorry, but SERVER IS FAILED!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         ContentValues values = new ContentValues();
         values.put("Id", product.getId());
         values.put("Name", product.getName());

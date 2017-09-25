@@ -3,6 +3,7 @@ package com.example.gietb.banhangkhoapham;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -30,6 +31,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 
 import adapter.PagerAdapter;
+import database.Database;
 import drawer.ISendButton;
 import drawer.SignInDrawerFragment;
 import drawer.SignOutDrawerFragment;
@@ -41,8 +43,10 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
     private DrawerLayout mDrawerLayout;
     private ViewPager viewPager;
     private ImageButton btnDrawer;
-
     private EditText edtSearch;
+
+    public static Database database;
+    public static String tableCartName = "CartOfProduct";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
             }
         });
         changeDrawer(null);
-        
+
         edtSearch = findViewById(R.id.searchInput);
     }
 
@@ -151,6 +155,23 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
     }
 
     private void createDatabase() {
+        //CREATE DATABASE
+        database = new Database(this, "data.sql", null, 1);
 
+        //CREATE TABLE
+        database.queryData("CREATE TABLE IF NOT EXISTS " + tableCartName +
+                "(" +
+                "Id INTEGER PRIMARY KEY," +
+                "Name VARCHAR(100) NOT NULL," +
+                "Price INTEGER NOT NULL," +
+                "ImageUrl1 VARCHAR(1000) NOT NULL," +
+                "ImageUrl2 VARCHAR(1000) NOT NULL," +
+                "Counting INTEGER NOT NULL" +
+                ")");
+//
+//        Cursor cursor = database.getData("SELECT * FROM " + tableCartName);
+//        while (cursor.moveToNext()) {
+//            Toast.makeText(this, cursor.getString(1), Toast.LENGTH_SHORT).show();
+//        }
     }
 }

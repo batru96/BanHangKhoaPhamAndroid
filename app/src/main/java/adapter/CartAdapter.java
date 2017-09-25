@@ -111,38 +111,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         private void goToDetail() {
             int cartId = ds.get(getPosition()).getId();
-            String url = DataUrl.productDetailUrl + cartId;
-            JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    try {
-                        JSONObject productObj = response.getJSONObject(0);
-                        Product product = new Product();
-                        product.setId(productObj.getInt("id"));
-                        product.setName(productObj.getString("nameProduct"));
-                        product.setPrice(productObj.getInt("price"));
-                        product.setDescription(productObj.getString("description"));
-                        product.setMaterial(productObj.getString("material"));
-                        product.setColor(productObj.getString("color"));
-
-                        JSONArray imageArray = productObj.getJSONArray("images");
-                        String[] images = DataUrl.convertJsonImgArrToStrArr(imageArray);
-                        product.setImages(images);
-                        String value = "";
-                        Intent intent = new Intent(context, DetailActivity.class);
-                        intent.putExtra("PRODUCT", product);
-                        context.startActivity(intent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("VOLLEY_CART_ADAPTER", error.getMessage());
-                }
-            });
-            VolleySingleton.getInstance(context).addToRequestQueue(arrayRequest);
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("ID", cartId);
+            context.startActivity(intent);
         }
 
         private void minusCounting() {

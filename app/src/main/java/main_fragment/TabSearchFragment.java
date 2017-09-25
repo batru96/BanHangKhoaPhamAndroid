@@ -84,7 +84,7 @@ public class TabSearchFragment extends Fragment implements SharedPreferences.OnS
     public void itemClick(View view, int position) {
         Product product = ds.get(position);
         Intent intent = new Intent(getContext(), DetailActivity.class);
-        intent.putExtra("PRODUCT", product);
+        intent.putExtra("ID", product.getId());
         startActivity(intent);
     }
 }

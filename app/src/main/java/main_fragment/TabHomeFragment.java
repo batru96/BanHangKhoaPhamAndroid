@@ -105,7 +105,7 @@ public class TabHomeFragment extends Fragment implements IClickListener {
     public void itemClick(View view, int position) {
         Product product = dsProduct.get(position);
         Intent intent = new Intent(getContext(), DetailActivity.class);
-        intent.putExtra("PRODUCT", product);
+        intent.putExtra("ID", product.getId());
         startActivity(intent);
     }
 }

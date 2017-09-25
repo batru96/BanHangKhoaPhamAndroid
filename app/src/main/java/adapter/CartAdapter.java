@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.gietb.banhangkhoapham.MainActivity;
 import com.example.gietb.banhangkhoapham.R;
 import com.squareup.picasso.Picasso;
 
@@ -23,6 +25,7 @@ import singleton.DataUrl;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Cart> ds;
+    private IClickListener clickListener;
 
     public CartAdapter(Context context, ArrayList<Cart> ds) {
         this.context = context;
@@ -50,7 +53,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return ds.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imgProduct;
         TextView tvName, tvPrice, tvCounting, btnDetail;
         ImageButton btnRemove;
@@ -66,6 +69,29 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             btnRemove = itemView.findViewById(R.id.deleteButton);
             btnMinus = itemView.findViewById(R.id.minusButton);
             btnPlus = itemView.findViewById(R.id.plusButton);
+
+            btnRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    removeItem(view);
+                }
+            });
+        }
+
+        private void removeItem(View view) {
+            int position = getPosition();
+            String query = "DELETE FROM " + MainActivity.tableCartName + " WHERE Id = " + ds.get(position).getId();
+            ds.remove(position);
+            notifyItemRemoved(position);
+            notifyDataSetChanged();
+            MainActivity.database.queryData(query);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (clickListener != null) {
+                clickListener.itemClick(view, getPosition());
+            }
         }
     }
 }

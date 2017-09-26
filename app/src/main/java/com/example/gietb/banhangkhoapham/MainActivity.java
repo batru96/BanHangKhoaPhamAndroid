@@ -3,7 +3,6 @@ package com.example.gietb.banhangkhoapham;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,10 +13,8 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,18 +25,17 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import adapter.PagerAdapter;
 import database.Database;
 import drawer.ISendButton;
-import drawer.SignInDrawerFragment;
-import drawer.SignOutDrawerFragment;
-import models.Cart;
+import drawer.IsLogInDrawerFragment;
+import drawer.IsLogOutDrawerFragment;
 import singleton.DataUrl;
 import singleton.VolleySingleton;
 
@@ -107,11 +103,10 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
     }
 
     private void initControls() {
-        SharedPreferences pre = getSharedPreferences("DATA_VALUE", MODE_PRIVATE);
+        final SharedPreferences pre = getSharedPreferences("DATA_VALUE", MODE_PRIVATE);
         String token = pre.getString("token", "null");
 
         // Check token
-        boolean isLogging = false;
         if (!token.equals("null")) {
             Map<String, String> tokenMap = new HashMap<>();
             tokenMap.put("token", token);
@@ -120,19 +115,25 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.d("EEE", response.toString());
+                            try {
+                                // CHANGE DRAWER IS
+                                String newToken = response.getString("token");
+                                SharedPreferences.Editor editor = pre.edit();
+                                editor.putString("token", newToken);
+                                editor.apply();
+                                changeDrawer("LOG_IN");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    changeDrawer("LOG_IN");
                     Log.d("VOLLEY_MAIN", error.getMessage());
                 }
             });
             VolleySingleton.getInstance(this).addToRequestQueue(objTokenRes);
-        }
-
-        if (isLogging) {
-
         }
 
         Toast.makeText(this, token, Toast.LENGTH_SHORT).show();
@@ -157,23 +158,23 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
         }
     }
 
-    public void changeDrawer(View view) {
+    public void changeDrawer(String tagFragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         Fragment fragment = null;
         String tag = null;
-        if (view == null) {
-            fragment = new SignInDrawerFragment();
+        if (tagFragment.equals("")) {
+            fragment = new IsLogInDrawerFragment();
             fragmentTransaction.replace(R.id.frameDrawer, fragment, "SIGN_IN");
             fragmentTransaction.commit();
             return;
         }
-        switch (view.getId()) {
-            case R.id.buttonSignOut:
-                fragment = new SignInDrawerFragment();
+        switch (tagFragment) {
+            case "LOG_OUT":
+                fragment = new IsLogInDrawerFragment();
                 tag = "SIGN_IN";
                 break;
-            case R.id.signInButton:
-                fragment = new SignOutDrawerFragment();
+            case "LOG_IN":
+                fragment = new IsLogOutDrawerFragment();
                 tag = "SIGN_OUT";
                 break;
         }
@@ -181,10 +182,6 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void sendButton(Button button) {
-        changeDrawer(button);
-    }
 
     private void createDatabase() {
         //CREATE DATABASE
@@ -200,5 +197,10 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
                 "ImageUrl2 VARCHAR(1000) NOT NULL," +
                 "Counting INTEGER NOT NULL" +
                 ")");
+    }
+
+    @Override
+    public void sendButton(String tag) {
+        changeDrawer(tag);
     }
 }

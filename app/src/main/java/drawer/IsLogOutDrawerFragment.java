@@ -16,7 +16,7 @@ import com.example.gietb.banhangkhoapham.R;
 
 import models.OrderHistory;
 
-public class SignOutDrawerFragment extends Fragment {
+public class IsLogOutDrawerFragment extends Fragment {
     private Button btnSignOut, btnOrderHistory, btnChangeInfo;
     private ISendButton listener;
 
@@ -33,12 +33,12 @@ public class SignOutDrawerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_drawer_signout, container, false);
+        View view = inflater.inflate(R.layout.fragment_drawer_islogout, container, false);
         btnSignOut = view.findViewById(R.id.buttonSignOut);
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.sendButton(btnSignOut);
+                listener.sendButton("LOG_OUT");
             }
         });
         btnOrderHistory = view.findViewById(R.id.buttonOrderHistory);

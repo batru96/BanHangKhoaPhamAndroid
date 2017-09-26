@@ -27,14 +27,14 @@ import java.util.Map;
 
 import singleton.VolleySingleton;
 
-public class SignInDrawerFragment extends Fragment {
+public class IsLogInDrawerFragment extends Fragment {
     private ISendButton listener;
     private Button btnSignIn;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_drawer_signin, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_drawer_islogin, container, false);
 
         initControls(rootView);
         return rootView;

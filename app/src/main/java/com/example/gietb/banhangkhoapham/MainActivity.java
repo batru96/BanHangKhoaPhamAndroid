@@ -134,15 +134,16 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
                 }
             });
             VolleySingleton.getInstance(this).addToRequestQueue(objTokenRes);
+        } else {
+            changeDrawer("LOG_OUT");
         }
-
-        Toast.makeText(this, token, Toast.LENGTH_SHORT).show();
+        
         mDrawerLayout = findViewById(R.id.drawerLayout);
         btnDrawer = findViewById(R.id.menuButton);
         btnDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDrawerLayout.openDrawer(Gravity.LEFT);
+                mDrawerLayout.openDrawer(Gravity.START);
             }
         });
 

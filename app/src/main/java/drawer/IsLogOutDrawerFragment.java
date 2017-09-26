@@ -3,6 +3,7 @@ package drawer;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -38,6 +39,10 @@ public class IsLogOutDrawerFragment extends Fragment {
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences pre = getActivity().getSharedPreferences("DATA_VALUE", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pre.edit();
+                editor.putString("token", "null");
+                editor.apply();
                 listener.sendButton("LOG_OUT");
             }
         });

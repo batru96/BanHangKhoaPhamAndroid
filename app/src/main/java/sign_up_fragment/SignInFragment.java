@@ -1,6 +1,9 @@
 package sign_up_fragment;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -15,8 +18,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.gietb.banhangkhoapham.MainActivity;
 import com.example.gietb.banhangkhoapham.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -53,7 +58,15 @@ public class SignInFragment extends Fragment {
                                 1. Save token
                                 2. Thay doi fragment drawer.
                                 */
-                                Log.d("EEE", response.toString());
+                                SharedPreferences pre = getActivity().getSharedPreferences("DATA_VALUE", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pre.edit();
+                                try {
+                                    editor.putString("token", response.getString("token"));
+                                    startActivity(new Intent(getActivity(), MainActivity.class));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                editor.apply();
                             }
                         }, new Response.ErrorListener() {
                     @Override

@@ -25,10 +25,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import adapter.PagerAdapter;
 import database.Database;
@@ -103,6 +107,35 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
     }
 
     private void initControls() {
+        SharedPreferences pre = getSharedPreferences("DATA_VALUE", MODE_PRIVATE);
+        String token = pre.getString("token", "null");
+
+        // Check token
+        boolean isLogging = false;
+        if (!token.equals("null")) {
+            Map<String, String> tokenMap = new HashMap<>();
+            tokenMap.put("token", token);
+            JSONObject object = new JSONObject(tokenMap);
+            JsonObjectRequest objTokenRes = new JsonObjectRequest(Request.Method.POST, DataUrl.checkLoginUrl, object,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d("EEE", response.toString());
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("VOLLEY_MAIN", error.getMessage());
+                }
+            });
+            VolleySingleton.getInstance(this).addToRequestQueue(objTokenRes);
+        }
+
+        if (isLogging) {
+
+        }
+
+        Toast.makeText(this, token, Toast.LENGTH_SHORT).show();
         mDrawerLayout = findViewById(R.id.drawerLayout);
         btnDrawer = findViewById(R.id.menuButton);
         btnDrawer.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
                 mDrawerLayout.openDrawer(Gravity.LEFT);
             }
         });
-        changeDrawer(null);
 
         edtSearch = findViewById(R.id.searchInput);
     }

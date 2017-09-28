@@ -16,7 +16,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -34,8 +33,8 @@ import java.util.Map;
 import adapter.PagerAdapter;
 import database.Database;
 import drawer.ISendButton;
-import drawer.IsLogInDrawerFragment;
 import drawer.IsLogOutDrawerFragment;
+import drawer.IsLogInDrawerFragment;
 import singleton.DataUrl;
 import singleton.VolleySingleton;
 
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
         } else {
             changeDrawer("LOG_OUT");
         }
-        
+
         mDrawerLayout = findViewById(R.id.drawerLayout);
         btnDrawer = findViewById(R.id.menuButton);
         btnDrawer.setOnClickListener(new View.OnClickListener() {
@@ -164,18 +163,18 @@ public class MainActivity extends AppCompatActivity implements ISendButton {
         Fragment fragment = null;
         String tag = null;
         if (tagFragment.equals("")) {
-            fragment = new IsLogInDrawerFragment();
+            fragment = new IsLogOutDrawerFragment();
             fragmentTransaction.replace(R.id.frameDrawer, fragment, "SIGN_IN");
             fragmentTransaction.commit();
             return;
         }
         switch (tagFragment) {
             case "LOG_OUT":
-                fragment = new IsLogInDrawerFragment();
+                fragment = new IsLogOutDrawerFragment();
                 tag = "SIGN_IN";
                 break;
             case "LOG_IN":
-                fragment = new IsLogOutDrawerFragment();
+                fragment = new IsLogInDrawerFragment();
                 tag = "SIGN_OUT";
                 break;
         }

@@ -15,7 +15,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.example.gietb.banhangkhoapham.R;
 
 import org.json.JSONObject;
@@ -24,7 +23,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import singleton.CustomStringRequest;
 import singleton.DataUrl;
 import singleton.VolleySingleton;
 

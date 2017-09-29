@@ -50,8 +50,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
     private void getData() {
         String token = getIntent().getStringExtra("TOKEN");
-        Log.d("TOKEN", token);
-        final Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("token", token);
         JSONObject jsonObject = new JSONObject(map);
 

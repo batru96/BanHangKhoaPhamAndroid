@@ -39,25 +39,28 @@
         android:padding="16dp">
 
         <EditText
+            android:hint="Enter your name"
             android:id="@+id/nameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Nguyen Van Pho" />
+            tools:text="Nguyen Van Pho" />
 
         <EditText
+            android:hint="Enter your address"
             android:id="@+id/addressInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="192 Le Thi Rieng" />
+            tools:text="192 Le Thi Rieng" />
 
         <EditText
+            android:hint="Enter your phone number"
             android:id="@+id/phoneInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:text="098 672 9636" />
+            tools:text="098 672 9636" />
 
         <Button
             android:id="@+id/changeInfoButton"

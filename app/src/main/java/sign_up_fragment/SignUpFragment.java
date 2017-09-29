@@ -15,6 +15,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.gietb.banhangkhoapham.R;
 
 import org.json.JSONObject;
@@ -61,18 +62,18 @@ public class SignUpFragment extends Fragment {
         map.put("email", email);
         map.put("password", password);
         final JSONObject object = new JSONObject(map);
-        CustomStringRequest request = new CustomStringRequest(Request.Method.POST, DataUrl.registerUrl,
-                object, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("EEE", response);
-            }
-        }, new Response.ErrorListener() {
+        StringRequest request = new StringRequest(Request.Method.POST, DataUrl.registerUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("EEE", response);
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("VOLLEY", error.getMessage());
             }
-        }){
+        }) {
             @Override
             public byte[] getBody() throws AuthFailureError {
                 try {

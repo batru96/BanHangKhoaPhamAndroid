@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Array;
@@ -29,12 +30,12 @@ import java.util.Map;
 
 import adapter.OrderHistoryAdapter;
 import models.OrderHistory;
+import singleton.CustomJsonRequest;
 import singleton.DataUrl;
 import singleton.VolleySingleton;
 
 public class OrderHistoryActivity extends AppCompatActivity {
 
-    private RecyclerView lvOrderHistory;
     private ArrayList<OrderHistory> ds;
     private OrderHistoryAdapter adapter;
 
@@ -52,20 +53,33 @@ public class OrderHistoryActivity extends AppCompatActivity {
         Log.d("TOKEN", token);
         final Map<String, String> map = new HashMap<>();
         map.put("token", token);
-        final JSONObject jsonObject = new JSONObject(map);
+        JSONObject jsonObject = new JSONObject(map);
 
-        StringRequest request = new StringRequest(Request.Method.POST, DataUrl.orderHistory, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-            }
-        }, new Response.ErrorListener() {
+        CustomJsonRequest request = new CustomJsonRequest(Request.Method.POST, DataUrl.orderHistory, jsonObject,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject obj = response.getJSONObject(i);
+                                String id = "ORD" + obj.getInt("id");
+                                String date_order = obj.getString("date_order");
+                                String status = obj.getInt("status") == 0 ? "Pending" : "Done";
+                                String total = obj.getInt("total") + "$";
+                                ds.add(new OrderHistory(id, date_order, status, total));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.d("VOLLEY", error.getMessage());
             }
         });
-        VolleySingleton.getInstance(this).addToRequestQueue(res);
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 
     private void initControls() {
@@ -77,7 +91,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
             }
         });
 
-        lvOrderHistory = findViewById(R.id.lvOrderHistory);
+        RecyclerView lvOrderHistory = findViewById(R.id.lvOrderHistory);
         lvOrderHistory.setHasFixedSize(true);
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

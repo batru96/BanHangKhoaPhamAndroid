@@ -14,6 +14,7 @@ public class DataUrl {
     public static String checkLoginUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/check_login.php";
     public static String orderHistory = "http://" + ipaddress + "/khoapham_ban_hang/app/order_history.php";
     public static String changeInfoUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/change_info.php";
+    public static String registerUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/register.php";
 
     public static String[] convertJsonImgArrToStrArr(JSONArray imageArray) {
         String[] images = new String[2];

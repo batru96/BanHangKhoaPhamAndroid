@@ -46,7 +46,6 @@ public class TabSearchFragment extends Fragment implements SharedPreferences.OnS
     private void readData(String valueStr) {
         try {
             JSONArray jsonArray = new JSONArray(valueStr);
-            Log.d("DDD", jsonArray.toString());
             if (jsonArray.length() != 0) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject productObj = jsonArray.getJSONObject(i);

@@ -28,6 +28,7 @@
                 android:textSize="@dimen/title_size" />
 
             <ImageButton
+                android:id="@+id/collectionButton"
                 android:layout_width="432dp"
                 android:layout_height="216dp"
                 android:background="@drawable/banner"

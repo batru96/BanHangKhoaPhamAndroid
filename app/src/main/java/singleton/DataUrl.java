@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 public class DataUrl {
-    private static final String ipaddress = "10.10.2.58";
+    private static final String ipaddress = "192.168.0.106";
     public static String indexUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/index.php";
     public static String imageProductUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/images/product/";
     public static String imageTypeUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/images/type/";
@@ -15,6 +15,10 @@ public class DataUrl {
     public static String orderHistory = "http://" + ipaddress + "/khoapham_ban_hang/app/order_history.php";
     public static String changeInfoUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/change_info.php";
     public static String registerUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/register.php";
+    public static String refreshTokenUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/refresh_token.php";
+    public static String getCollection = "http://" + ipaddress + "/khoapham_ban_hang/app/get_collection.php?page=";
+    public static String productByTypeUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/product_by_type.php";
+
 
     public static String[] convertJsonImgArrToStrArr(JSONArray imageArray) {
         String[] images = new String[2];

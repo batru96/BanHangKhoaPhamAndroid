@@ -11,11 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.gietb.banhangkhoapham.CollectionActivity;
 import com.example.gietb.banhangkhoapham.DetailActivity;
 import com.example.gietb.banhangkhoapham.R;
 
@@ -42,6 +44,8 @@ public class TabHomeFragment extends Fragment implements IClickListener {
     private ArrayList<Product> dsProduct;
     private ProductAdapter productAdapter;
 
+    private ImageButton btnCollection;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,6 +68,14 @@ public class TabHomeFragment extends Fragment implements IClickListener {
         productAdapter = new ProductAdapter(dsProduct, getContext());
         productAdapter.setClickListener(this);
         lvProducts.setAdapter(productAdapter);
+
+        btnCollection = view.findViewById(R.id.collectionButton);
+        btnCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), CollectionActivity.class));
+            }
+        });
 
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest

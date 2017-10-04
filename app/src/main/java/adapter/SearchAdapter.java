@@ -15,13 +15,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import models.Product;
+import models.SearchProduct;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
     private Context context;
-    private ArrayList<Product> ds;
+    private ArrayList<SearchProduct> ds;
     private IClickListener clickListener;
 
-    public SearchAdapter(Context context, ArrayList<Product> ds) {
+    public SearchAdapter(Context context, ArrayList<SearchProduct> ds) {
         this.context = context;
         this.ds = ds;
     }
@@ -39,12 +40,17 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Product product = ds.get(position);
+        SearchProduct product = ds.get(position);
         holder.tvName.setText(product.getName());
         holder.tvPrice.setText(String.valueOf(product.getPrice()).concat(" $"));
         holder.tvColor.setText(product.getColor());
         holder.tvMaterial.setText(product.getMaterial());
         holder.tvColor.setText(product.getColor());
+        if (product.getIsNew() == 0) {
+            holder.tvState.setText("Not now!!!");
+        } else {
+            holder.tvState.setText("");
+        }
         Picasso.with(context).load(product.getImages()[0]).into(holder.imgSearch);
     }
 
@@ -55,7 +61,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imgSearch;
-        TextView tvName, tvPrice, tvMaterial, tvColor;
+        TextView tvName, tvPrice, tvMaterial, tvColor, tvState;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -64,6 +70,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             tvPrice = itemView.findViewById(R.id.priceText);
             tvMaterial = itemView.findViewById(R.id.materialText);
             tvColor = itemView.findViewById(R.id.colorText);
+            tvState = itemView.findViewById(R.id.tvState);
             itemView.setOnClickListener(this);
         }
 

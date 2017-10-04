@@ -1,67 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="8dp"
-    android:background="@color/white"
-    android:orientation="horizontal"
-    android:padding="@dimen/search_padding">
-
-    <ImageView
-        android:id="@+id/searchImage"
-        android:layout_width="@dimen/image_search_width"
-        android:layout_height="@dimen/image_search_height"
-        android:contentDescription="@string/failed" />
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/search_padding">
 
-        <TextView
-            android:id="@+id/nameText"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textColor="@color/name_search_color"
-            android:textSize="24sp"
-            tools:text="Floral Print T" />
+        <ImageView
+            android:id="@+id/searchImage"
+            android:layout_width="@dimen/image_search_width"
+            android:layout_height="@dimen/image_search_height"
+            android:contentDescription="@string/failed" />
 
-        <TextView
-            android:id="@+id/priceText"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textColor="@color/colorContact"
-            android:textSize="@dimen/search_text_size"
-            tools:text="120$" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
 
-        <TextView
-            android:id="@+id/materialText"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textColor="@color/text_search_color"
-            android:textSize="@dimen/search_text_size"
-            tools:text="Material color" />
+            <TextView
+                android:id="@+id/nameText"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/name_search_color"
+                android:textSize="24sp"
+                tools:text="Floral Print T" />
 
-        <TextView
-            android:id="@+id/colorText"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textColor="@color/text_search_color"
-            android:textSize="@dimen/search_text_size"
-            tools:text="Color Dark Sizn" />
+            <TextView
+                android:id="@+id/priceText"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorContact"
+                android:textSize="@dimen/search_text_size"
+                tools:text="120$" />
+
+            <TextView
+                android:id="@+id/materialText"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_search_color"
+                android:textSize="@dimen/search_text_size"
+                tools:text="Material color" />
+
+            <TextView
+                android:id="@+id/colorText"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_search_color"
+                android:textSize="@dimen/search_text_size"
+                tools:text="Color Dark Sizn" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/tvState"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="70sp"
+        android:text="Not now"
+        android:textColor="@color/colorAccent"/>
+</FrameLayout>

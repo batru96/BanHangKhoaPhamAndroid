@@ -9,15 +9,15 @@ import java.io.Serializable;
 import singleton.DataUrl;
 
 public class Product implements Serializable{
-    private int id;
-    private String name;
-    private int idType;
-    private String nameType;
-    private int price;
-    private String color;
-    private String material;
-    private String description;
-    private String[] images;
+    protected int id;
+    protected String name;
+    protected int idType;
+    protected String nameType;
+    protected int price;
+    protected String color;
+    protected String material;
+    protected String description;
+    protected String[] images;
 
     public Product() {
 

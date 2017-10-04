@@ -42,6 +42,7 @@ public class DetailActivity extends AppCompatActivity {
     private ImageButton btnBack, btnAddProductToCart;
     private ImageView img1, img2;
     private TextView tvName, tvDecription, tvMaterial, tvColor;
+    private int state;
 
     private Product product;
 
@@ -51,6 +52,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Intent intent = getIntent();
         int productId = intent.getIntExtra("ID", -1);
+        state = intent.getIntExtra("STATE", -1);
 
         initControls(productId);
         eventListener();
@@ -82,6 +84,10 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void addProductToCart(Product product) {
+        if (state != 1) {
+            Toast.makeText(this, "HET HANG ROI ONG NOI", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (product.getName().equals("null")) {
             Toast.makeText(this, "Sorry, but SERVER IS FAILED!", Toast.LENGTH_SHORT).show();
             return;

@@ -26,12 +26,13 @@ import java.util.ArrayList;
 import adapter.IClickListener;
 import adapter.SearchAdapter;
 import models.Product;
+import models.SearchProduct;
 import singleton.DataUrl;
 
 public class TabSearchFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener, IClickListener {
 
     private RecyclerView lvSearch;
-    private ArrayList<Product> ds;
+    private ArrayList<SearchProduct> ds;
     private SearchAdapter adapter;
 
     @Nullable
@@ -45,10 +46,11 @@ public class TabSearchFragment extends Fragment implements SharedPreferences.OnS
     private void readData(String valueStr) {
         try {
             JSONArray jsonArray = new JSONArray(valueStr);
+            Log.d("DDD", jsonArray.toString());
             if (jsonArray.length() != 0) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject productObj = jsonArray.getJSONObject(i);
-                    ds.add(new Product(productObj));
+                    ds.add(new SearchProduct(productObj));
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -82,9 +84,10 @@ public class TabSearchFragment extends Fragment implements SharedPreferences.OnS
 
     @Override
     public void itemClick(View view, int position) {
-        Product product = ds.get(position);
+        SearchProduct product = ds.get(position);
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("ID", product.getId());
+        intent.putExtra("STATE", product.getIsNew());
         startActivity(intent);
     }
 }

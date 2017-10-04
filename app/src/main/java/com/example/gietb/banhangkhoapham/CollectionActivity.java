@@ -1,11 +1,14 @@
 package com.example.gietb.banhangkhoapham;
 
+import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,14 +23,16 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import adapter.IClickListener;
 import adapter.SearchAdapter;
 import models.SearchProduct;
 import singleton.DataUrl;
 import singleton.VolleySingleton;
 
-public class CollectionActivity extends AppCompatActivity {
+public class CollectionActivity extends AppCompatActivity implements IClickListener{
     private int numPage = 1;
 
+    private SwipeRefreshLayout mSwiper;
     private RecyclerView revCollection;
     private ArrayList<SearchProduct> ds;
     private SearchAdapter adapter;
@@ -43,17 +48,20 @@ public class CollectionActivity extends AppCompatActivity {
         revCollection = findViewById(R.id.revCollection);
         ds = new ArrayList<>();
         adapter = new SearchAdapter(this, ds);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        adapter.setClickListener(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         revCollection.setLayoutManager(layoutManager);
         revCollection.setAdapter(adapter);
         loadDataToRecyclerView(numPage);
 
-       revCollection.addOnScrollListener(new RecyclerView.OnScrollListener() {
-           @Override
-           public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-               super.onScrolled(recyclerView, dx, dy);
-           }
-       });
+        mSwiper = findViewById(R.id.refreshLayout);
+        mSwiper.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadDataToRecyclerView(numPage++);
+                mSwiper.setRefreshing(false);
+            }
+        });
     }
 
     private void loadDataToRecyclerView(int page) {
@@ -78,5 +86,14 @@ public class CollectionActivity extends AppCompatActivity {
             }
         });
         VolleySingleton.getInstance(this).addToRequestQueue(request);
+    }
+
+    @Override
+    public void itemClick(View view, int position) {
+        SearchProduct product = ds.get(position);
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("ID", product.getId());
+        intent.putExtra("STATE", product.getIsNew());
+        startActivity(intent);
     }
 }

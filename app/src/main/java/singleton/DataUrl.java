@@ -17,7 +17,7 @@ public class DataUrl {
     public static String registerUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/register.php";
     public static String refreshTokenUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/refresh_token.php";
     public static String getCollection = "http://" + ipaddress + "/khoapham_ban_hang/app/get_collection.php?page=";
-    public static String productByTypeUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/product_by_type.php";
+    public static String productByTypeUrl = "http://" + ipaddress + "/khoapham_ban_hang/app/product_by_type.php?id_type=";
 
 
     public static String[] convertJsonImgArrToStrArr(JSONArray imageArray) {

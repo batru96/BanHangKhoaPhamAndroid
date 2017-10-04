@@ -47,7 +47,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         holder.tvMaterial.setText(product.getMaterial());
         holder.tvColor.setText(product.getColor());
         if (product.getIsNew() == 0) {
-            holder.tvState.setText("Not now!!!");
+            holder.tvState.setText("Empty");
         } else {
             holder.tvState.setText("");
         }

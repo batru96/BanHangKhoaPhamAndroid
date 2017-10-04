@@ -36,11 +36,22 @@ public class CollectionActivity extends AppCompatActivity implements IClickListe
     private RecyclerView revCollection;
     private ArrayList<SearchProduct> ds;
     private SearchAdapter adapter;
+    private String requestUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
+
+        Intent intent = getIntent();
+        String fromContext = intent.getStringExtra("FROM_CONTEXT");
+        if (fromContext.equals("CATEGORY")) {
+            requestUrl = DataUrl.getCollection;
+            int id_type = intent.getIntExtra("ID_TYPE", -1);
+            requestUrl = DataUrl.productByTypeUrl + id_type + "&page=";
+        } else {
+            requestUrl = DataUrl.getCollection;
+        }
 
         initControls();
     }
@@ -65,7 +76,7 @@ public class CollectionActivity extends AppCompatActivity implements IClickListe
     }
 
     private void loadDataToRecyclerView(int page) {
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, DataUrl.getCollection + page, null,
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, requestUrl + page, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {

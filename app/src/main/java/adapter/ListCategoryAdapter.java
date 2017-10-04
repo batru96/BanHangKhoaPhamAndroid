@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.*;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.gietb.banhangkhoapham.CollectionActivity;
 import com.example.gietb.banhangkhoapham.R;
 import com.squareup.picasso.Picasso;
 
@@ -51,7 +53,10 @@ public class ListCategoryAdapter extends android.support.v4.view.PagerAdapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), position + "", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, CollectionActivity.class);
+                intent.putExtra("FROM_CONTEXT", "CATEGORY");
+                intent.putExtra("ID_TYPE", ds.get(position).getId());
+                context.startActivity(intent);
             }
         });
 

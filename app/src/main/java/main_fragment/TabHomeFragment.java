@@ -73,7 +73,9 @@ public class TabHomeFragment extends Fragment implements IClickListener {
         btnCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CollectionActivity.class));
+                Intent intent = new Intent(getActivity(), CollectionActivity.class);
+                intent.putExtra("FROM_CONTEXT", "COLLECTION");
+                startActivity(intent);
             }
         });
 
